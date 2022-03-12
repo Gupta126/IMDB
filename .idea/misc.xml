@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/drawable/bookmark.xml" value="0.231" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/drawable/ic_back.xml" value="0.196" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.196" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/layout/activity_main.xml" value="0.30570652173913043" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/layout/fragment_detail.xml" value="0.18802083333333333" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/layout/genre_item.xml" value="0.17395833333333333" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/layout/home_page_item.xml" value="0.17395833333333333" />
+        <entry key="..\:/Study/IMDBMovieApp/app/src/main/res/layout/result_item.xml" value="0.17395833333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
