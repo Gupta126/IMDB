@@ -35,6 +35,7 @@ class HomePageAdapters(
     }
 
     override fun getItemCount(): Int {
+        Log.i("Adapter", "getItemCount: ${results.size}")
         return results.size
     }
 

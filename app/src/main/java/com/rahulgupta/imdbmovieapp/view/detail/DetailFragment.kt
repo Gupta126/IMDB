@@ -42,21 +42,16 @@ class DetailFragment : Fragment() {
 
     private fun bindView() {
         if (result != null) {
-            result.backdrop_path?.let { Helper.loadImage(requireContext(), it, binding.coverImage) }
             result.poster_path?.let { Helper.loadImage(requireContext(), it, binding.posterImage) }
             result.genre_ids?.let { Helper.getGenresFromIds(it)?.let { genres!!.addAll(it) } }
             binding.rating.text = result.vote_average.toString() + ""
-            binding.title.text = result.title
+
             binding.topTitle.text = result.title
             binding.overView.text = result.overview
-            binding.voters.text = result.vote_count.toString() + ""
+            binding.popularity.text = result.popularity.toString() + ""
+
+            binding.releasedate.text = result.release_date.toString()
         }
-        val layoutManager = FlexboxLayoutManager(requireContext())
-        layoutManager.flexDirection = FlexDirection.ROW
-        layoutManager.justifyContent = JustifyContent.FLEX_START
-        binding.generesRecyclerview.layoutManager = layoutManager
-        val adapter = genres?.let { GenreAdapter(it) }
-        binding.generesRecyclerview.adapter = adapter
         binding.backButton.setOnClickListener { closeFragment() }
     }
 

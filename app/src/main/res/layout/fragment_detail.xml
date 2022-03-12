@@ -16,14 +16,6 @@
             android:clipToPadding="false"
             android:paddingBottom="20dp">
 
-            <ImageView
-                android:id="@+id/cover_image"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:adjustViewBounds="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/top_bar" />
-
             <RelativeLayout
                 android:id="@+id/top_bar"
                 android:layout_width="match_parent"
@@ -65,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/gradientup"
-                app:layout_constraintBottom_toBottomOf="@+id/cover_image" />
+                app:layout_constraintBottom_toBottomOf="@+id/top_bar" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mid_layout"
@@ -73,7 +65,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cover_image">
+                app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
                 <ImageView
                     android:id="@+id/poster_image"
@@ -84,34 +76,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/generes_recyclerview"
-                    app:layout_constraintStart_toStartOf="@id/poster_image"
-                    app:layout_constraintTop_toBottomOf="@id/poster_image"
-                    tools:text="Bahubali" />
-
-                <TextView
                     android:id="@+id/rating_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
                     android:gravity="center"
                     android:padding="4dp"
                     android:text="Rating :-"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title" />
+                    app:layout_constraintTop_toTopOf="@+id/poster_image"
+                    app:layout_constraintStart_toEndOf="@+id/poster_image"
+                    tools:layout_editor_absoluteY="12dp" />
 
                 <TextView
                     android:id="@+id/rating"
@@ -128,50 +104,52 @@
                     tools:text="8.5" />
 
                 <TextView
-                    android:id="@+id/voters_heading"
+                    android:id="@+id/popularity_heading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="24dp"
                     android:padding="4dp"
-                    android:text="Voters :-"
+                    android:text="Popularity :-"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rating" />
+                    app:layout_constraintStart_toEndOf="@+id/poster_image"
+                    app:layout_constraintTop_toBottomOf="@id/rating_heading" />
 
                 <TextView
-                    android:id="@+id/voters"
+                    android:id="@+id/popularity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:textColor="@color/white"
                     android:textSize="12sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/voters_heading"
-                    app:layout_constraintStart_toEndOf="@id/voters_heading"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/popularity_heading"
+                    app:layout_constraintStart_toEndOf="@id/popularity_heading"
                     tools:text="86,455" />
 
                 <TextView
-                    android:id="@+id/genre_heading"
-                    android:layout_width="0dp"
+                    android:id="@+id/releasedate_heading"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="24dp"
                     android:padding="4dp"
-                    android:text="@string/genres"
+                    android:text="Relese date:-"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/poster_image"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/popularity_heading" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/generes_recyclerview"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/poster_image"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/poster_image"
-                    app:layout_constraintTop_toBottomOf="@id/genre_heading"
-                    tools:listitem="@layout/genre_item" />
+                <TextView
+                    android:id="@+id/releasedate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/releasedate_heading"
+                    app:layout_constraintStart_toEndOf="@id/releasedate_heading"
+                    tools:text="86,455" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

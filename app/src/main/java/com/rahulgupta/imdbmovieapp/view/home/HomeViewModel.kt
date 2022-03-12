@@ -21,10 +21,10 @@ class HomeViewModel @Inject constructor(
     private val databaseService: DatabaseService
 ) : ViewModel() {
 
-    val popularMutableLiveData = MutableLiveData<List<Result>>()
     val nowPlayingMutableLiveData = MutableLiveData<List<Result>>()
     val msg = MutableLiveData<String>()
-    val loading=MutableLiveData<Boolean>()
+    val loading = MutableLiveData<Boolean>()
+
     init {
         getData()
         loading.postValue(false)
@@ -37,31 +37,23 @@ class HomeViewModel @Inject constructor(
                     delay(1000)
                     loading.postValue(true)
                     try {
-                        val resultDao=databaseService.resultDao()
+                        val resultDao = databaseService.resultDao()
                         val popular = async {
-                            val popularResults=apiService.getPopularMovies()
-                            val nowPlayingResults=apiService.getNowPlayingMovies()
-                            for(i:Result in popularResults?.results!!){
-                                i.type=Keys.POPULAR
-                                i.pKey=Keys.POPULAR+""+i.id
-                            }
-                            for(i:Result in nowPlayingResults?.results!!){
-                                i.type=Keys.NOW_PLAYING
-                                i.pKey=Keys.NOW_PLAYING+""+i.id
+                            val popularResults = apiService.getPopularMovies()
+                            val nowPlayingResults = apiService.getNowPlayingMovies()
+//                            for(i:Result in popularResults?.results!!){
+//                                i.type=Keys.POPULAR
+//                                i.pKey=Keys.POPULAR+""+i.id
+//                            }
+                            for (i: Result in nowPlayingResults?.results!!) {
+                                i.type = Keys.NOW_PLAYING
+                                i.pKey = Keys.NOW_PLAYING + "" + i.id
                             }
                             resultDao.clear()
-                            resultDao.insertMany(popularResults.results!!)
+                            //resultDao.insertMany(popularResults.results!!)
                             resultDao.insertMany(nowPlayingResults.results!!)
                         }
                         popular.await().let {
-                            Log.i("awaited",it.toString())
-                            popularMutableLiveData.postValue(
-                                withContext(Dispatchers.Default) {
-                                    resultDao.getResultsByType(
-                                        Keys.POPULAR
-                                    )
-                                }
-                            )
                             nowPlayingMutableLiveData.postValue(
                                 withContext(Dispatchers.Default) {
                                     resultDao.getResultsByType(
@@ -76,14 +68,12 @@ class HomeViewModel @Inject constructor(
 
                     loading.postValue(false)
                 }
-            }
-            catch (unknownHostException:UnknownHostException) {
-                Log.i("error",unknownHostException.message.toString())
+            } catch (unknownHostException: UnknownHostException) {
+                Log.i("error", unknownHostException.message.toString())
                 msg.postValue("No internet connection")
                 getDataFromDatabase()
-            }
-            catch (exception :Exception){
-                Log.i("error",exception.message.toString())
+            } catch (exception: Exception) {
+                Log.i("error", exception.message.toString())
                 getDataFromDatabase()
             }
 
@@ -98,30 +88,17 @@ class HomeViewModel @Inject constructor(
                 coroutineScope {
                     delay(1000)
                     try {
-                        val popular =
-                            async { databaseService.resultDao().getResultsByType(Keys.POPULAR) }
-                        popularMutableLiveData.postValue(popular.await())
-                    }
-                    catch (exception: Exception) {
-                        Log.i("popular execeptiondb", exception.message.toString())
-                    }
-
-                    try {
                         val nowPlaying =
                             async { databaseService.resultDao().getResultsByType(Keys.NOW_PLAYING) }
                         nowPlayingMutableLiveData.postValue(nowPlaying.await())
-                    }
-                    catch (exception: Exception) {
+                    } catch (exception: Exception) {
                         Log.i("nowplaying execeptiondb", exception.message.toString())
                     }
                 }
-            }
-            catch (e:Exception){
-                Log.i("error from db",e.message.toString())
-                popularMutableLiveData.postValue(ArrayList())
+            } catch (e: Exception) {
+                Log.i("error from db", e.message.toString())
                 nowPlayingMutableLiveData.postValue(ArrayList())
-            }
-            finally {
+            } finally {
                 loading.postValue(false)
             }
         }

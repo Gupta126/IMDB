@@ -22,15 +22,12 @@ class HomeFragment : Fragment(), HomePageAdapters.onHomePageItemClickListener{
 
     private val mViewModel: HomeViewModel by viewModels()
     private lateinit var nowPlayingAdapter: HomePageAdapters
-    private lateinit var popularAdapter: HomePageAdapters
     private lateinit var nowPlayingList: MutableList<Result>
-    private lateinit var popularList: MutableList<Result>
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         nowPlayingList = mutableListOf()
-        popularList = mutableListOf()
     }
 
 
@@ -49,6 +46,7 @@ class HomeFragment : Fragment(), HomePageAdapters.onHomePageItemClickListener{
         binding.nowPlayingRecyclerview.setLayoutManager(l1)
         nowPlayingAdapter = HomePageAdapters(nowPlayingList!!, requireContext(), this, 0)
         binding.nowPlayingRecyclerview.setAdapter(nowPlayingAdapter)
+        binding.nowPlayingRecyclerview.setHasFixedSize(true)
         binding.nowPlayingRecyclerview.setNestedScrollingEnabled(false)
     }
 
@@ -57,7 +55,7 @@ class HomeFragment : Fragment(), HomePageAdapters.onHomePageItemClickListener{
             nowPlayingList!!.clear()
             nowPlayingList!!.addAll(results)
             nowPlayingAdapter.notifyDataSetChanged()
-            binding.homeScroll.isVisible = nowPlayingList.size != 0
+            binding.nowPlayingRecyclerview.isVisible = nowPlayingList.size != 0
         }
 
         mViewModel.msg.observe(viewLifecycleOwner, {
